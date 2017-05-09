@@ -4,6 +4,7 @@
  */
 
 export default {
+    port: 8095,
     route_on: true,
     nginx_cache_path: '/var/cache/nginx/xuexb.com',
     nginx_cache_filter(filepath) {
