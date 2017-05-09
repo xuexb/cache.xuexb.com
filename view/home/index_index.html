@@ -1,0 +1,130 @@
+{% extends './layout.html' %}
+
+{% block title -%}
+缓存列表_前端小武博客
+{%- endblock %}
+
+{% block style -%}
+<style type="text/css">
+    #list {
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    button {
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+        border: none;
+        background-color: #ccc;
+        cursor: pointer;
+        height: 30px;
+    }
+</style>
+{%- endblock %}
+
+{% block content -%}
+<div class="nav">
+    <ul>
+        <li class="active"><a href="/">缓存列表</a></li>
+        <li><a href="/dashboard">日志数据</a></li>
+    </ul>
+</div>
+
+<div class="markdown-body">
+    <table id="list">
+        <thead>
+            <tr>
+                <th>链接</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if list and list.length %}
+                {% for val in list %}
+                <tr data-key="{{ val.cache_key }}">
+                    <td>
+                        <a href="//{{ val.url }}" target="_blank">{{ val.url }}</a>
+                    </td>
+                    <td>
+                        <button class="clear">清除缓存</button>
+                        <button class="open">无缓存打开</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">没有数据~</td>
+                </tr>
+            {% endif %}
+        </tbody>
+
+        {% if list and list.length %}
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <button id="clearall">全部清除</button>
+                    </td>
+                </tr>
+            </tfoot>
+        {% endif %}
+    </table>
+</div>
+{%- endblock %}
+
+{% block script -%}
+<script>
+(function () {
+    var $tbody = $('#list tbody');
+
+    // 行点击
+    $tbody.on('click', 'tr', function () {
+        $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
+    });
+
+    // 清除当前
+    $tbody.on('click', '.clear', function (event) {
+        event.stopPropagation();
+
+        $.ajax({
+            url: '/index/clear',
+            type: 'POST',
+            cache: false,
+            data: {
+                keys: $(this).closest('tr').data('key')
+            }
+        });
+
+        $(this).closest('tr').remove();
+    });
+
+    // 打开
+    $tbody.on('click', '.open', function (event) {
+        event.stopPropagation();
+
+        var url = $(this).closest('tr').find('a').attr('href');
+
+        if (url.indexOf('?') > 0) {
+            url += '&';
+        }
+        else {
+            url += '?';
+        }
+
+        window.open(url + 'nocache=1');
+    });
+
+    $('#clearall').on('click', function () {
+        this.disabled = true;
+
+        $.ajax({
+            url: '/index/clear_all',
+            cache: false,
+            complete: function() {
+                location.reload(true);
+            }
+        });
+    });
+})();
+</script>
+{%- endblock %}

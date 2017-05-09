@@ -1,0 +1,49 @@
+.nav {
+    height: 30px;
+    border-bottom: 1px solid  #ccc;
+    line-height: 30px;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+    border: 1px solid  #ccc;
+    margin-bottom: 20px;
+}
+.nav li {
+    float: left;
+    width: 100px;
+    border-right: 1px solid  #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+/*导航高亮*/
+.nav li.active {
+    height: 31px;
+    background-color: #fff;
+}
+.nav a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+
+body {
+    margin: 10px;
+}
+
+.site-footer {
+    bottom: 0;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    left: 0; 
+    width: 100%; 
+    text-align: center;
+}
+body {
+    margin-bottom: 85px;
+}
+html {
+    min-height: 100%;
+    position: relative;
+    background-color: #fff; 
+}

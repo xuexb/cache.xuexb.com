@@ -1,0 +1,14 @@
+files:
+  - "src"
+eslint:
+  env:
+    node: true
+  globals:
+    think: true
+  rules:
+    no-console: 0
+    fecs-camelcase:
+      - 2
+      -
+        ignore:
+          - "/_/"

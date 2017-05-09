@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/markdown.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/page.css">
+    <script src="/static/js/jquery.js"></script>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    {% block script %}{% endblock %}
+
+    <footer class="site-footer">
+        &copy; xuexb.com - <a href="https://xuexb.com">前端小武</a>
+    </footer>
+</body>
+</html>
