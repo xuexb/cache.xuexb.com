@@ -4,5 +4,4 @@
  */
 
 export default {
-    resource_on: false
 };
