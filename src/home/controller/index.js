@@ -100,6 +100,29 @@ export default class extends Base {
         this.assign('request_uri', request_uri);
 
 
+        // 404 top10
+        let request_404 = {};
+        for (let val of data) {
+            if (!val.request_uri || val.status !== '404') {
+                continue;
+            }
+            if (val.request_uri.indexOf('?') > 0) {
+                val.request_uri = val.request_uri.substr(0, val.request_uri.indexOf('?'));
+            }
+            if (!request_404[val.request_uri]) {
+                request_404[val.request_uri] = 0;
+            }
+            request_404[val.request_uri] += 1;
+        }
+        request_404 = Object.keys(request_404).map(key => {
+            return {
+                key,
+                value: request_404[key],
+                ratio: (request_404[key] / data.length * 100).toFixed(2)
+            };
+        }).sort((a, b) => a.value < b.value ? 1 : -1).slice(0, 10);
+        this.assign('request_404', request_404);
+
         return this.display();
     }
 }
