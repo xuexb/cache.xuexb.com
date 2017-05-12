@@ -100,13 +100,16 @@ export default class extends Base {
             }
             request_uri[val.request_uri] += 1;
         }
-        request_uri = Object.keys(request_uri).map(key => {
-            return {
-                key,
-                value: request_uri[key],
-                ratio: (request_uri[key] / data.length * 100).toFixed(2)
-            };
-        }).sort((a, b) => a.value < b.value ? 1 : -1).slice(0, 10);
+        request_uri = Object.keys(request_uri)
+            .map(key => {
+                return {
+                    key,
+                    value: request_uri[key],
+                    ratio: (request_uri[key] / data.length * 100).toFixed(2)
+                };
+            })
+            .filter(v => v.key.indexOf('/static/') !== 0)
+            .sort((a, b) => a.value < b.value ? 1 : -1).slice(0, 10);
         this.assign('request_uri', request_uri);
 
 
