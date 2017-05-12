@@ -37,7 +37,7 @@ export default class NginxCache extends think.service.base {
         let data = '';
 
         try {
-            data = execSync(`grep -ar 'KEY:' .`, {
+            data = execSync(`grep -ar 'KEY:' . | grep -v 'nocache=1'`, {
                 cwd: this.options.path
             });
         }
