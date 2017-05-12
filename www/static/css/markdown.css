@@ -124,6 +124,7 @@
     width: 100%;
     word-break: keep-all;
     word-break: normal;
+    -webkit-overflow-scrolling: touch; 
 }
 .markdown-body table th {
     font-weight: bold;
