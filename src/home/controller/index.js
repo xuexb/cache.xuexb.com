@@ -89,7 +89,7 @@ export default class extends Base {
         // 处理访问top10
         let request_uri = {};
         for (let val of data) {
-            if (!val.request_uri) {
+            if (!val.request_uri || (val.status !== '200' && val.status !== '304')) {
                 continue;
             }
             if (val.request_uri.indexOf('?') > 0) {
