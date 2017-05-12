@@ -26,9 +26,11 @@
 </div>
 
 <div class="markdown-body">
-    <select>
-        <option selected>当前实时数据</option>
-        <option disabled>20170509</option>
+    <select onchange="location.href = '?date=' + this.value">
+        <option value="">当前实时数据</option>
+        {% for date in list %}
+            <option value="{{ date }}"{% if currentDate and date === currentDate %} selected{% endif %}>{{ date }}</option>
+        {% endfor %}
     </select>
 
     <h2>Http状态码</h2>
@@ -41,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if status %}
+            {% if status and status.length %}
                 {% for val in status %}
                 <tr>
                     <td>
@@ -57,7 +59,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="2">没有数据~</td>
+                    <td colspan="3">没有数据~</td>
                 </tr>
             {% endif %}
         </tbody>
@@ -73,7 +75,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if cache_status %}
+            {% if cache_status and cache_status.length %}
                 {% for val in cache_status %}
                 <tr>
                     <td>
@@ -89,7 +91,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="2">没有数据~</td>
+                    <td colspan="3">没有数据~</td>
                 </tr>
             {% endif %}
         </tbody>
@@ -105,7 +107,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if request_uri %}
+            {% if request_uri and request_uri.length %}
                 {% for val in request_uri %}
                 <tr>
                     <td>
@@ -121,7 +123,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="2">没有数据~</td>
+                    <td colspan="3">没有数据~</td>
                 </tr>
             {% endif %}
         </tbody>
@@ -137,7 +139,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if request_404 %}
+            {% if request_404 and request_404.length %}
                 {% for val in request_404 %}
                 <tr>
                     <td>
@@ -153,7 +155,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="2">没有数据~</td>
+                    <td colspan="3">没有数据~</td>
                 </tr>
             {% endif %}
         </tbody>

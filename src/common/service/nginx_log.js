@@ -51,7 +51,7 @@ export default class NginxLog extends think.service.base {
 
         let data = [];
 
-        if (filepath && !fs.existsSync(filepath)) {
+        if (!filepath || (filepath && !fs.existsSync(filepath))) {
             return data;
         }
 
@@ -75,5 +75,20 @@ export default class NginxLog extends think.service.base {
         }
 
         return data;
+    }
+
+    /**
+     * 获取备份日志日期
+     *
+     * @return {Array}
+     */
+    getBackDate() {
+        let dirpath = this.options.back_path;
+
+        if (!dirpath || (dirpath && !fs.existsSync(dirpath))) {
+            return [];
+        }
+
+        return fs.readdirSync(dirpath) || [];
     }
 }

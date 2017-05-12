@@ -39,8 +39,18 @@ export default class extends Base {
      * 日志仪表盘
      */
     dashboardAction() {
-        const data = this.nginxLog.read();
-        // return this.json(data)
+        const list = this.nginxLog.getBackDate();
+        const date = this.get('date');
+        let data;
+
+        if (date) {
+            data = this.nginxLog.read(date);
+        }
+        else {
+            data = this.nginxLog.read();
+        }
+        this.assign('currentDate', date);
+        this.assign('list', list);
 
         // 处理http状态码
         let status = {};
