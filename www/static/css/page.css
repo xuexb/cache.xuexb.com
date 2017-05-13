@@ -47,3 +47,10 @@ html {
     position: relative;
     background-color: #fff; 
 }
+
+.markdown-body th {
+    background-color: #eaeaea;
+}
+.markdown-body tr:hover {
+    background-color: #f0f0f0 !important;
+}
