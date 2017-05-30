@@ -39,7 +39,7 @@ export default class extends Base {
      * 日志仪表盘
      */
     dashboardAction() {
-        const list = this.nginxLog.getBackDate();
+        const list = this.nginxLog.getBackDate().sort((a, b) => a < b ? 1 : -1);
         const date = this.get('date');
         let data;
 
